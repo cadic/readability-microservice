@@ -1,6 +1,6 @@
 const { isProbablyReaderable, Readability } = require("@mozilla/readability");
 const express = require("express");
-var bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 
 const { JSDOM } = require("jsdom");
 const app = express();
