@@ -21,6 +21,11 @@ app.post("/read", (req, res) => {
   const url = req.body?.url;
   const html = req.body?.html;
 
+  if (!html || !url) {
+    res.json({ error: true, message: "Wrong request" });
+	return;
+  }
+
   const doc = new JSDOM(html, { url: url });
 
   if (isProbablyReaderable(doc.window.document)) {
