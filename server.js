@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.post("/read", (req, res) => {
   if (key) {
     if (req.get("key") !== key) {
-      res.json({ error: true, message: "Worng API key" });
+      res.json({ error: true, message: "Wrong API key" });
       return;
     }
   }
