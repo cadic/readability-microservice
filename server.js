@@ -1,14 +1,23 @@
 const { isProbablyReaderable, Readability } = require("@mozilla/readability");
 const express = require("express");
-var bodyParser = require("body-parser");
-
+const bodyParser = require("body-parser");
 const { JSDOM } = require("jsdom");
+const yargs = require("yargs");
+
 const app = express();
-const port = 5052;
+
+const argv = yargs.option("port", {
+  alias: "p",
+  description: "Specify port",
+  type: Number,
+  default: 5052,
+}).argv;
+
+const port = argv.port;
 
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
-app.post("/read", (req, res, next) => {
+app.post("/read", (req, res) => {
   const url = req.body?.url;
   const html = req.body?.html;
 
@@ -22,4 +31,6 @@ app.post("/read", (req, res, next) => {
   }
 });
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`Readability listen on port ${port}`);
+});
